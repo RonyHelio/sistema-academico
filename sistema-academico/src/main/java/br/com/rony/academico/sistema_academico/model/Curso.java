@@ -12,7 +12,7 @@ public class Curso {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "cur_nr_id")
-    private long id;
+    private Long id;
 
 
     @Column(name = "cur_tx_nome", nullable = false)

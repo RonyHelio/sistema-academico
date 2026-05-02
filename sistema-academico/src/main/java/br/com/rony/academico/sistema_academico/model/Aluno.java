@@ -12,7 +12,8 @@ public class Aluno {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @Column(name = "alu_nr_id")
+    private Long id;
 
     @OneToOne
     @JoinColumn(name = "usu_nr_id", nullable = false)
