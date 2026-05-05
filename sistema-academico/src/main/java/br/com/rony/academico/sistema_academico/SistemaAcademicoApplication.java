@@ -1,7 +1,9 @@
 package br.com.rony.academico.sistema_academico;
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot
+
+		.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class SistemaAcademicoApplication {
