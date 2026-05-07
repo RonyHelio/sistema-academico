@@ -1,8 +1,8 @@
 package br.com.rony.academico.sistema_academico.controller;
 
-import br.com.rony.academico.sistema_academico.dto.MensagemChatRequestDTO;
-import br.com.rony.academico.sistema_academico.dto.MensagemChatResponseDTO;
-import br.com.rony.academico.sistema_academico.model.MensagemChat;
+import br.com.rony.academico.sistema_academico.dto.ApiResponse;
+import br.com.rony.academico.sistema_academico.dto.request.MensagemChatRequestDTO;
+import br.com.rony.academico.sistema_academico.dto.response.MensagemChatResponseDTO;
 import br.com.rony.academico.sistema_academico.service.MensagemChatService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,23 +11,26 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Controller responsável pelo gerenciamento de mensagens do chat por turma.
+ * Apenas recebe requisições, valida e delega ao service.
+ */
 @RestController
-@RequestMapping("/api/chat")
-
+@RequestMapping("/api/mensagens")
 public class MensagemChatController {
 
     @Autowired
-    private MensagemChatService chatService;
+    private MensagemChatService mensagemChatService;
 
-    @PostMapping("/enviar")
-    public ResponseEntity<MensagemChatResponseDTO> enviarMensagem(@Valid @RequestBody MensagemChatRequestDTO requestDTO) {
-        MensagemChatResponseDTO mensagemSalva = chatService.enviarMensagem(requestDTO);
-        return ResponseEntity.ok(mensagemSalva);
+    @PostMapping
+    public ResponseEntity<ApiResponse<MensagemChatResponseDTO>> enviarMensagem(@Valid @RequestBody MensagemChatRequestDTO dto) {
+        MensagemChatResponseDTO resposta = mensagemChatService.enviarMensagem(dto);
+        return ResponseEntity.ok(ApiResponse.sucesso(resposta));
     }
 
-    @GetMapping("/turma/{chatTurmaId}")
-    public ResponseEntity<List<MensagemChatResponseDTO>> listarMensagens(@PathVariable Long chatTurmaId) {
-        List<MensagemChatResponseDTO> historico = chatService.listarMensagensDoChat(chatTurmaId);
-        return ResponseEntity.ok(historico);
+    @GetMapping("/chat/{chatTurmaId}")
+    public ResponseEntity<ApiResponse<List<MensagemChatResponseDTO>>> listarMensagens(@PathVariable Long chatTurmaId) {
+        List<MensagemChatResponseDTO> resposta = mensagemChatService.listarMensagensDoChat(chatTurmaId);
+        return ResponseEntity.ok(ApiResponse.sucesso(resposta));
     }
 }

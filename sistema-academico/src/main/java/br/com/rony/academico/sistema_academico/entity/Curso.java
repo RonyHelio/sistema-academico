@@ -1,12 +1,19 @@
-package br.com.rony.academico.sistema_academico.model;
+package br.com.rony.academico.sistema_academico.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
+/**
+ * Entidade que representa um curso no sistema acadêmico.
+ * Responsável por agrupar alunos e disciplinas.
+ */
 @Entity
-@Data
 @Table(name = "cur_curso", schema = "academico")
-
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Curso {
 
     @Id
@@ -14,14 +21,12 @@ public class Curso {
     @Column(name = "cur_nr_id")
     private Long id;
 
-
     @Column(name = "cur_tx_nome", nullable = false)
-    private String nomeCurso;
-
+    private String nome;
 
     @Column(name = "cur_tx_codigo_suap")
     private String codigoSuap;
 
-    @Column(name = "cur_tx_status", nullable = false)
+    @Column(name = "cur_tx_status", nullable = false, length = 1)
     private String status;
 }

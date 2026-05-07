@@ -1,14 +1,22 @@
-package br.com.rony.academico.sistema_academico.model;
+package br.com.rony.academico.sistema_academico.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
+/**
+ * Entidade que representa o chat de uma turma.
+ * Cada turma possui um chat próprio para comunicação.
+ * Relacionamentos: OneToOne com Turma.
+ */
 @Entity
-@Data
 @Table(name = "cht_chat_turma", schema = "academico")
-
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class ChatTurma {
 
     @Id
@@ -16,7 +24,7 @@ public class ChatTurma {
     @Column(name = "cht_nr_id")
     private Long id;
 
-    @ManyToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tur_nr_id", nullable = false)
     private Turma turma;
 
@@ -26,6 +34,6 @@ public class ChatTurma {
     @Column(name = "cht_dt_criacao", nullable = false)
     private LocalDateTime dataCriacao;
 
-    @Column(name = "cht_tx_status", length = 1)
-    private String status = "A";
+    @Column(name = "cht_tx_status", nullable = false, length = 1)
+    private String status;
 }

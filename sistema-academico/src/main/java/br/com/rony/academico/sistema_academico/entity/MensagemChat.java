@@ -1,13 +1,22 @@
-package br.com.rony.academico.sistema_academico.model;
+package br.com.rony.academico.sistema_academico.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
+/**
+ * Entidade que representa uma mensagem no chat de turma.
+ * Contém remetente, turma, data/hora e status ativo/inativo.
+ * Relacionamentos: ManyToOne com ChatTurma e ManyToOne com Usuario.
+ */
 @Entity
-@Data
 @Table(name = "msg_chat_mensagem", schema = "academico")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class MensagemChat {
 
     @Id
@@ -15,11 +24,11 @@ public class MensagemChat {
     @Column(name = "msg_nr_id")
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cht_nr_id", nullable = false)
     private ChatTurma chatTurma;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "usu_nr_id", nullable = false)
     private Usuario remetente;
 

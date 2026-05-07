@@ -1,27 +1,33 @@
-package br.com.rony.academico.sistema_academico.model;
+package br.com.rony.academico.sistema_academico.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
+/**
+ * Entidade que representa um professor no sistema acadêmico.
+ * Responsável por vincular um usuário ao papel docente.
+ * Relacionamentos: OneToOne com Usuario.
+ */
 @Entity
-@Data
 @Table(name = "pro_professor", schema = "academico")
-
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Professor {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "pro_nr_id")
     private Long id;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "usu_nr_id", nullable = false)
     private Usuario usuario;
 
     @Column(name = "pro_tx_matricula_siape")
     private String matriculaSiape;
-
-    @Column(name = "pro_tx_suap_id")
-    private String suapId;
 
     @Column(name = "pro_tx_status", nullable = false, length = 1)
     private String status;

@@ -1,31 +1,40 @@
-package br.com.rony.academico.sistema_academico.model;
+package br.com.rony.academico.sistema_academico.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
+/**
+ * Entidade que representa uma turma no sistema acadêmico.
+ * Responsável por vincular disciplina, professor e período letivo.
+ * Relacionamentos: ManyToOne com Disciplina e Professor.
+ */
 @Entity
-@Data
 @Table(name = "tur_turma", schema = "academico")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Turma {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "tur_nr_id", nullable = false)
+    @Column(name = "tur_nr_id")
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "dis_nr_id", nullable = false)
     private Disciplina disciplina;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "pro_nr_id")
     private Professor professor;
 
     @Column(name = "pel_nr_id", nullable = false)
-    private Long periodoLetivo;
+    private Long periodoLetivoId;
 
     @Column(name = "tur_tx_descricao", nullable = false)
-    private String descricaoTurma;
+    private String descricao;
 
     @Column(name = "tur_tx_codigo_suap")
     private String codigoSuap;

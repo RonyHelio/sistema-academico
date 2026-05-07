@@ -1,16 +1,24 @@
-package br.com.rony.academico.sistema_academico.model;
+package br.com.rony.academico.sistema_academico.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
-@Data
+/**
+ * Entidade que representa uma disciplina no sistema acadêmico.
+ * Responsável por armazenar dados de disciplinas ofertadas.
+ */
 @Entity
 @Table(name = "dis_disciplina", schema = "academico")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Disciplina {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "dis_nr_id", nullable = false)
+    @Column(name = "dis_nr_id")
     private Long id;
 
     @Column(name = "dis_tx_nome", nullable = false)
@@ -27,7 +35,4 @@ public class Disciplina {
 
     @Column(name = "dis_tx_status", nullable = false, length = 1)
     private String status;
-
-
-
 }

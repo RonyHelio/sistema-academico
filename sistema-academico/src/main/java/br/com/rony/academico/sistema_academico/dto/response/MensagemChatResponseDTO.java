@@ -1,14 +1,20 @@
-package br.com.rony.academico.sistema_academico.dto;
+package br.com.rony.academico.sistema_academico.dto.response;
 
-import lombok.Data;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class MensagemChatResponseDTO {
+
     private Long id;
     private Long chatTurmaId;
-    private Long remetenteID;
+    private Long remetenteId;
+    private String nomeRemetente;
     private String texto;
     private LocalDateTime dataEnvio;
     private String status;
