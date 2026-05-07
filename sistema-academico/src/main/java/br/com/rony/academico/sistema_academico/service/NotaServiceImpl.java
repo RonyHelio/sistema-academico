@@ -7,7 +7,7 @@ import br.com.rony.academico.sistema_academico.entity.Nota;
 import br.com.rony.academico.sistema_academico.mapper.NotaMapper;
 import br.com.rony.academico.sistema_academico.repository.MatriculaTurmaRepository;
 import br.com.rony.academico.sistema_academico.repository.NotaRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,13 +18,11 @@ import java.util.stream.Collectors;
  * Contém regras de negócio para lançamento de notas.
  */
 @Service
+@RequiredArgsConstructor
 public class NotaServiceImpl implements NotaService {
 
-    @Autowired
-    private NotaRepository notaRepository;
-
-    @Autowired
-    private MatriculaTurmaRepository matriculaTurmaRepository;
+    private final NotaRepository notaRepository;
+    private final MatriculaTurmaRepository matriculaTurmaRepository;
 
     @Override
     public NotaResponseDTO salvar(NotaRequestDTO dto) {

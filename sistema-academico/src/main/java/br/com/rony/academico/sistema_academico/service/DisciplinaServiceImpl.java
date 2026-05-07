@@ -5,7 +5,7 @@ import br.com.rony.academico.sistema_academico.dto.response.DisciplinaResponseDT
 import br.com.rony.academico.sistema_academico.entity.Disciplina;
 import br.com.rony.academico.sistema_academico.mapper.DisciplinaMapper;
 import br.com.rony.academico.sistema_academico.repository.DisciplinaRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,10 +16,10 @@ import java.util.stream.Collectors;
  * Contém regras de negócio relacionadas a disciplinas.
  */
 @Service
+@RequiredArgsConstructor
 public class DisciplinaServiceImpl implements DisciplinaService {
 
-    @Autowired
-    private DisciplinaRepository disciplinaRepository;
+    private final DisciplinaRepository disciplinaRepository;
 
     @Override
     public DisciplinaResponseDTO salvar(DisciplinaRequestDTO dto) {

@@ -9,7 +9,7 @@ import br.com.rony.academico.sistema_academico.mapper.MensagemChatMapper;
 import br.com.rony.academico.sistema_academico.repository.ChatTurmaRepository;
 import br.com.rony.academico.sistema_academico.repository.MensagemChatRepository;
 import br.com.rony.academico.sistema_academico.repository.UsuarioRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,16 +20,12 @@ import java.util.stream.Collectors;
  * Contém regras de negócio do chat por turma.
  */
 @Service
+@RequiredArgsConstructor
 public class MensagemChatServiceImpl implements MensagemChatService {
 
-    @Autowired
-    private MensagemChatRepository mensagemRepository;
-
-    @Autowired
-    private ChatTurmaRepository chatTurmaRepository;
-
-    @Autowired
-    private UsuarioRepository usuarioRepository;
+    private final MensagemChatRepository mensagemRepository;
+    private final ChatTurmaRepository chatTurmaRepository;
+    private final UsuarioRepository usuarioRepository;
 
     @Override
     public MensagemChatResponseDTO enviarMensagem(MensagemChatRequestDTO dto) {

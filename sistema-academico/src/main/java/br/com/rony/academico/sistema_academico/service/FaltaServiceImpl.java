@@ -7,7 +7,7 @@ import br.com.rony.academico.sistema_academico.entity.MatriculaTurma;
 import br.com.rony.academico.sistema_academico.mapper.FaltaMapper;
 import br.com.rony.academico.sistema_academico.repository.FaltaRepository;
 import br.com.rony.academico.sistema_academico.repository.MatriculaTurmaRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,13 +18,11 @@ import java.util.stream.Collectors;
  * Contém regras de negócio para lançamento de faltas.
  */
 @Service
+@RequiredArgsConstructor
 public class FaltaServiceImpl implements FaltaService {
 
-    @Autowired
-    private FaltaRepository faltaRepository;
-
-    @Autowired
-    private MatriculaTurmaRepository matriculaTurmaRepository;
+    private final FaltaRepository faltaRepository;
+    private final MatriculaTurmaRepository matriculaTurmaRepository;
 
     @Override
     public FaltaResponseDTO salvar(FaltaRequestDTO dto) {

@@ -9,7 +9,7 @@ import br.com.rony.academico.sistema_academico.mapper.AlunoMapper;
 import br.com.rony.academico.sistema_academico.repository.AlunoRepository;
 import br.com.rony.academico.sistema_academico.repository.CursoRepository;
 import br.com.rony.academico.sistema_academico.repository.UsuarioRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,16 +20,12 @@ import java.util.stream.Collectors;
  * Contém regras de negócio relacionadas a alunos.
  */
 @Service
+@RequiredArgsConstructor
 public class AlunoServiceImpl implements AlunoService {
 
-    @Autowired
-    private AlunoRepository alunoRepository;
-
-    @Autowired
-    private UsuarioRepository usuarioRepository;
-
-    @Autowired
-    private CursoRepository cursoRepository;
+    private final AlunoRepository alunoRepository;
+    private final UsuarioRepository usuarioRepository;
+    private final CursoRepository cursoRepository;
 
     @Override
     public AlunoResponseDTO salvar(AlunoRequestDTO dto) {

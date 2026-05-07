@@ -9,7 +9,7 @@ import br.com.rony.academico.sistema_academico.mapper.TurmaMapper;
 import br.com.rony.academico.sistema_academico.repository.DisciplinaRepository;
 import br.com.rony.academico.sistema_academico.repository.ProfessorRepository;
 import br.com.rony.academico.sistema_academico.repository.TurmaRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,16 +20,12 @@ import java.util.stream.Collectors;
  * Contém regras de negócio relacionadas a turmas.
  */
 @Service
+@RequiredArgsConstructor
 public class TurmaServiceImpl implements TurmaService {
 
-    @Autowired
-    private TurmaRepository turmaRepository;
-
-    @Autowired
-    private DisciplinaRepository disciplinaRepository;
-
-    @Autowired
-    private ProfessorRepository professorRepository;
+    private final TurmaRepository turmaRepository;
+    private final DisciplinaRepository disciplinaRepository;
+    private final ProfessorRepository professorRepository;
 
     @Override
     public TurmaResponseDTO salvar(TurmaRequestDTO dto) {

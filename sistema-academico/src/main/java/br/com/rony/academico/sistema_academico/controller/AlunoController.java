@@ -1,11 +1,10 @@
 package br.com.rony.academico.sistema_academico.controller;
 
-import br.com.rony.academico.sistema_academico.dto.ApiResponse;
 import br.com.rony.academico.sistema_academico.dto.request.AlunoRequestDTO;
 import br.com.rony.academico.sistema_academico.dto.response.AlunoResponseDTO;
 import br.com.rony.academico.sistema_academico.service.AlunoService;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,38 +16,34 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/api/alunos")
+@RequiredArgsConstructor
 public class AlunoController {
 
-    @Autowired
-    private AlunoService alunoService;
+    private final AlunoService alunoService;
 
     @PostMapping
-    public ResponseEntity<ApiResponse<AlunoResponseDTO>> salvar(@Valid @RequestBody AlunoRequestDTO dto) {
-        AlunoResponseDTO resposta = alunoService.salvar(dto);
-        return ResponseEntity.ok(ApiResponse.sucesso(resposta));
+    public ResponseEntity<AlunoResponseDTO> salvar(@Valid @RequestBody AlunoRequestDTO dto) {
+        return ResponseEntity.ok(alunoService.salvar(dto));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ApiResponse<AlunoResponseDTO>> buscarPorId(@PathVariable Long id) {
-        AlunoResponseDTO resposta = alunoService.buscarPorId(id);
-        return ResponseEntity.ok(ApiResponse.sucesso(resposta));
+    public ResponseEntity<AlunoResponseDTO> buscarPorId(@PathVariable Long id) {
+        return ResponseEntity.ok(alunoService.buscarPorId(id));
     }
 
     @GetMapping
-    public ResponseEntity<ApiResponse<List<AlunoResponseDTO>>> listarTodos() {
-        List<AlunoResponseDTO> resposta = alunoService.listarTodos();
-        return ResponseEntity.ok(ApiResponse.sucesso(resposta));
+    public ResponseEntity<List<AlunoResponseDTO>> listarTodos() {
+        return ResponseEntity.ok(alunoService.listarTodos());
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ApiResponse<AlunoResponseDTO>> atualizar(@PathVariable Long id, @Valid @RequestBody AlunoRequestDTO dto) {
-        AlunoResponseDTO resposta = alunoService.atualizar(id, dto);
-        return ResponseEntity.ok(ApiResponse.sucesso(resposta));
+    public ResponseEntity<AlunoResponseDTO> atualizar(@PathVariable Long id, @Valid @RequestBody AlunoRequestDTO dto) {
+        return ResponseEntity.ok(alunoService.atualizar(id, dto));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<ApiResponse<Void>> inativar(@PathVariable Long id) {
+    public ResponseEntity<Void> inativar(@PathVariable Long id) {
         alunoService.inativar(id);
-        return ResponseEntity.ok(ApiResponse.sucesso(null));
+        return ResponseEntity.noContent().build();
     }
 }

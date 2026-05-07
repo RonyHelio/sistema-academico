@@ -5,7 +5,7 @@ import br.com.rony.academico.sistema_academico.dto.response.CursoResponseDTO;
 import br.com.rony.academico.sistema_academico.entity.Curso;
 import br.com.rony.academico.sistema_academico.mapper.CursoMapper;
 import br.com.rony.academico.sistema_academico.repository.CursoRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,10 +16,10 @@ import java.util.stream.Collectors;
  * Contém regras de negócio relacionadas a cursos.
  */
 @Service
+@RequiredArgsConstructor
 public class CursoServiceImpl implements CursoService {
 
-    @Autowired
-    private CursoRepository cursoRepository;
+    private final CursoRepository cursoRepository;
 
     @Override
     public CursoResponseDTO salvar(CursoRequestDTO dto) {

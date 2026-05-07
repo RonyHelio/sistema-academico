@@ -5,7 +5,7 @@ import br.com.rony.academico.sistema_academico.dto.response.UsuarioResponseDTO;
 import br.com.rony.academico.sistema_academico.entity.Usuario;
 import br.com.rony.academico.sistema_academico.mapper.UsuarioMapper;
 import br.com.rony.academico.sistema_academico.repository.UsuarioRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,10 +16,10 @@ import java.util.stream.Collectors;
  * Contém regras de negócio relacionadas a usuários do sistema.
  */
 @Service
+@RequiredArgsConstructor
 public class UsuarioServiceImpl implements UsuarioService {
 
-    @Autowired
-    private UsuarioRepository usuarioRepository;
+    private final UsuarioRepository usuarioRepository;
 
     @Override
     public UsuarioResponseDTO salvar(UsuarioRequestDTO dto) {
