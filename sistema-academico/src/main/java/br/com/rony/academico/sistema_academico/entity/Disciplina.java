@@ -3,10 +3,6 @@ package br.com.rony.academico.sistema_academico.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-/**
- * Entidade que representa uma disciplina no sistema acadêmico.
- * Responsável por armazenar dados de disciplinas ofertadas.
- */
 @Entity
 @Table(name = "dis_disciplina", schema = "academico")
 @Getter

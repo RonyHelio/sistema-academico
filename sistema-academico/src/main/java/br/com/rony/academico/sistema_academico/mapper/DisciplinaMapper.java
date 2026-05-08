@@ -4,9 +4,6 @@ import br.com.rony.academico.sistema_academico.dto.request.DisciplinaRequestDTO;
 import br.com.rony.academico.sistema_academico.dto.response.DisciplinaResponseDTO;
 import br.com.rony.academico.sistema_academico.entity.Disciplina;
 
-/**
- * Mapper responsável pela conversão entre Disciplina e seus DTOs.
- */
 public class DisciplinaMapper {
 
     public static Disciplina toEntity(DisciplinaRequestDTO dto) {

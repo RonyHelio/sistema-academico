@@ -1,4 +1,4 @@
-package br.com.rony.academico.sistema_academico.service;
+package br.com.rony.academico.sistema_academico.service.impl;
 
 import br.com.rony.academico.sistema_academico.dto.request.MensagemChatRequestDTO;
 import br.com.rony.academico.sistema_academico.dto.response.MensagemChatResponseDTO;
@@ -9,16 +9,13 @@ import br.com.rony.academico.sistema_academico.mapper.MensagemChatMapper;
 import br.com.rony.academico.sistema_academico.repository.ChatTurmaRepository;
 import br.com.rony.academico.sistema_academico.repository.MensagemChatRepository;
 import br.com.rony.academico.sistema_academico.repository.UsuarioRepository;
+import br.com.rony.academico.sistema_academico.service.MensagemChatService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * Implementação do serviço de gerenciamento de mensagens do chat.
- * Contém regras de negócio do chat por turma.
- */
 @Service
 @RequiredArgsConstructor
 public class MensagemChatServiceImpl implements MensagemChatService {

@@ -1,11 +1,7 @@
--- =============================================================
--- V1: Criação das tabelas do Sistema Acadêmico
--- Schema: academico
--- =============================================================
+
 
 CREATE SCHEMA IF NOT EXISTS academico;
 
--- Tabela de Período Letivo
 CREATE TABLE IF NOT EXISTS academico.pel_periodo_letivo (
     pel_nr_id       SERIAL PRIMARY KEY,
     pel_nr_ano      INTEGER NOT NULL,
@@ -14,7 +10,6 @@ CREATE TABLE IF NOT EXISTS academico.pel_periodo_letivo (
     pel_tx_status   CHAR(1) NOT NULL DEFAULT 'A'
 );
 
--- Tabela de Usuário
 CREATE TABLE IF NOT EXISTS academico.usu_usuario (
     usu_nr_id       SERIAL PRIMARY KEY,
     usu_tx_nome     VARCHAR(150) NOT NULL,
@@ -26,7 +21,6 @@ CREATE TABLE IF NOT EXISTS academico.usu_usuario (
     usu_tx_status   CHAR(1) NOT NULL DEFAULT 'A'
 );
 
--- Tabela de Curso
 CREATE TABLE IF NOT EXISTS academico.cur_curso (
     cur_nr_id         SERIAL PRIMARY KEY,
     cur_tx_nome       VARCHAR(150) NOT NULL,
@@ -34,7 +28,6 @@ CREATE TABLE IF NOT EXISTS academico.cur_curso (
     cur_tx_status     CHAR(1) NOT NULL DEFAULT 'A'
 );
 
--- Tabela de Disciplina
 CREATE TABLE IF NOT EXISTS academico.dis_disciplina (
     dis_nr_id            SERIAL PRIMARY KEY,
     dis_tx_nome          VARCHAR(150) NOT NULL,
@@ -44,7 +37,6 @@ CREATE TABLE IF NOT EXISTS academico.dis_disciplina (
     dis_tx_status        CHAR(1) NOT NULL DEFAULT 'A'
 );
 
--- Tabela de Professor
 CREATE TABLE IF NOT EXISTS academico.pro_professor (
     pro_nr_id             SERIAL PRIMARY KEY,
     usu_nr_id             INTEGER NOT NULL REFERENCES academico.usu_usuario(usu_nr_id),
@@ -52,7 +44,6 @@ CREATE TABLE IF NOT EXISTS academico.pro_professor (
     pro_tx_status         CHAR(1) NOT NULL DEFAULT 'A'
 );
 
--- Tabela de Aluno
 CREATE TABLE IF NOT EXISTS academico.alu_aluno (
     alu_nr_id       SERIAL PRIMARY KEY,
     usu_nr_id       INTEGER NOT NULL REFERENCES academico.usu_usuario(usu_nr_id),
@@ -61,7 +52,6 @@ CREATE TABLE IF NOT EXISTS academico.alu_aluno (
     alu_tx_status   CHAR(1) NOT NULL DEFAULT 'A'
 );
 
--- Tabela de Turma
 CREATE TABLE IF NOT EXISTS academico.tur_turma (
     tur_nr_id         SERIAL PRIMARY KEY,
     dis_nr_id         INTEGER NOT NULL REFERENCES academico.dis_disciplina(dis_nr_id),
@@ -72,7 +62,6 @@ CREATE TABLE IF NOT EXISTS academico.tur_turma (
     tur_tx_status     CHAR(1) NOT NULL DEFAULT 'A'
 );
 
--- Tabela de Matrícula na Turma (entidade intermediária Aluno <-> Turma)
 CREATE TABLE IF NOT EXISTS academico.mtr_matricula_turma (
     mtr_nr_id   SERIAL PRIMARY KEY,
     alu_nr_id   INTEGER NOT NULL REFERENCES academico.alu_aluno(alu_nr_id),
@@ -80,7 +69,6 @@ CREATE TABLE IF NOT EXISTS academico.mtr_matricula_turma (
     mtr_tx_status CHAR(1) NOT NULL DEFAULT 'A'
 );
 
--- Tabela de Chat da Turma
 CREATE TABLE IF NOT EXISTS academico.cht_chat_turma (
     cht_nr_id     SERIAL PRIMARY KEY,
     tur_nr_id     INTEGER NOT NULL REFERENCES academico.tur_turma(tur_nr_id),
@@ -89,7 +77,6 @@ CREATE TABLE IF NOT EXISTS academico.cht_chat_turma (
     cht_tx_status CHAR(1) NOT NULL DEFAULT 'A'
 );
 
--- Tabela de Mensagens do Chat
 CREATE TABLE IF NOT EXISTS academico.msg_chat_mensagem (
     msg_nr_id       SERIAL PRIMARY KEY,
     cht_nr_id       INTEGER NOT NULL REFERENCES academico.cht_chat_turma(cht_nr_id),
@@ -99,7 +86,6 @@ CREATE TABLE IF NOT EXISTS academico.msg_chat_mensagem (
     msg_tx_status   CHAR(1) NOT NULL DEFAULT 'A'
 );
 
--- Tabela de Notas
 CREATE TABLE IF NOT EXISTS academico.not_nota (
     not_nr_id       SERIAL PRIMARY KEY,
     mtr_nr_id       INTEGER NOT NULL REFERENCES academico.mtr_matricula_turma(mtr_nr_id),
@@ -108,7 +94,6 @@ CREATE TABLE IF NOT EXISTS academico.not_nota (
     not_tx_status   CHAR(1) NOT NULL DEFAULT 'A'
 );
 
--- Tabela de Faltas
 CREATE TABLE IF NOT EXISTS academico.fal_falta (
     fal_nr_id         SERIAL PRIMARY KEY,
     mtr_nr_id         INTEGER NOT NULL REFERENCES academico.mtr_matricula_turma(mtr_nr_id),

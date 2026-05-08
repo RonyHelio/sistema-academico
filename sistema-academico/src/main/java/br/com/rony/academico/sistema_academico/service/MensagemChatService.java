@@ -5,9 +5,6 @@ import br.com.rony.academico.sistema_academico.dto.response.MensagemChatResponse
 
 import java.util.List;
 
-/**
- * Interface de serviço para gerenciamento de mensagens do chat por turma.
- */
 public interface MensagemChatService {
 
     MensagemChatResponseDTO enviarMensagem(MensagemChatRequestDTO dto);

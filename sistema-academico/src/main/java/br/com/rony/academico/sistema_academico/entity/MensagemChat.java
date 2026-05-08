@@ -5,11 +5,6 @@ import lombok.*;
 
 import java.time.LocalDateTime;
 
-/**
- * Entidade que representa uma mensagem no chat de turma.
- * Contém remetente, turma, data/hora e status ativo/inativo.
- * Relacionamentos: ManyToOne com ChatTurma e ManyToOne com Usuario.
- */
 @Entity
 @Table(name = "msg_chat_mensagem", schema = "academico")
 @Getter

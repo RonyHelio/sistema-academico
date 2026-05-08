@@ -6,9 +6,6 @@ import br.com.rony.academico.sistema_academico.entity.Disciplina;
 import br.com.rony.academico.sistema_academico.entity.Professor;
 import br.com.rony.academico.sistema_academico.entity.Turma;
 
-/**
- * Mapper responsável pela conversão entre Turma e seus DTOs.
- */
 public class TurmaMapper {
 
     public static Turma toEntity(TurmaRequestDTO dto, Disciplina disciplina, Professor professor) {

@@ -3,11 +3,6 @@ package br.com.rony.academico.sistema_academico.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-/**
- * Entidade que representa uma turma no sistema acadêmico.
- * Responsável por vincular disciplina, professor e período letivo.
- * Relacionamentos: ManyToOne com Disciplina e Professor.
- */
 @Entity
 @Table(name = "tur_turma", schema = "academico")
 @Getter

@@ -5,9 +5,6 @@ import br.com.rony.academico.sistema_academico.dto.response.NotaResponseDTO;
 import br.com.rony.academico.sistema_academico.entity.MatriculaTurma;
 import br.com.rony.academico.sistema_academico.entity.Nota;
 
-/**
- * Mapper responsável pela conversão entre Nota e seus DTOs.
- */
 public class NotaMapper {
 
     public static Nota toEntity(NotaRequestDTO dto, MatriculaTurma matriculaTurma) {

@@ -3,10 +3,6 @@ package br.com.rony.academico.sistema_academico.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-/**
- * Entidade que representa um curso no sistema acadêmico.
- * Responsável por agrupar alunos e disciplinas.
- */
 @Entity
 @Table(name = "cur_curso", schema = "academico")
 @Getter

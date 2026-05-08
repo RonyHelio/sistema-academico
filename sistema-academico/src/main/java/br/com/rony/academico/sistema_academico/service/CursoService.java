@@ -5,9 +5,6 @@ import br.com.rony.academico.sistema_academico.dto.response.CursoResponseDTO;
 
 import java.util.List;
 
-/**
- * Interface de serviço para gerenciamento de cursos.
- */
 public interface CursoService {
 
     CursoResponseDTO salvar(CursoRequestDTO dto);

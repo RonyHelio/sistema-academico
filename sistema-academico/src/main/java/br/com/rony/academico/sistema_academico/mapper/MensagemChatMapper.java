@@ -8,9 +8,6 @@ import br.com.rony.academico.sistema_academico.entity.Usuario;
 
 import java.time.LocalDateTime;
 
-/**
- * Mapper responsável pela conversão entre MensagemChat e seus DTOs.
- */
 public class MensagemChatMapper {
 
     public static MensagemChat toEntity(MensagemChatRequestDTO dto, ChatTurma chatTurma, Usuario remetente) {

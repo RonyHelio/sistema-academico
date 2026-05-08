@@ -5,11 +5,6 @@ import lombok.*;
 
 import java.time.LocalDateTime;
 
-/**
- * Entidade que representa o chat de uma turma.
- * Cada turma possui um chat próprio para comunicação.
- * Relacionamentos: OneToOne com Turma.
- */
 @Entity
 @Table(name = "cht_chat_turma", schema = "academico")
 @Getter

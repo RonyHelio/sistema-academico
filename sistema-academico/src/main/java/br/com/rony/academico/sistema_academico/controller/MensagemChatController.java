@@ -10,10 +10,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-/**
- * Controller responsável pelo gerenciamento de mensagens do chat por turma.
- * Apenas recebe requisições, valida e delega ao service.
- */
 @RestController
 @RequestMapping("/api/mensagens")
 @RequiredArgsConstructor

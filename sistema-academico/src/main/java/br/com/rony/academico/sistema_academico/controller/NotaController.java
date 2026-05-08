@@ -10,9 +10,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-/**
- * Controller responsável pelo gerenciamento de notas.
- */
 @RestController
 @RequestMapping("/api/notas")
 @RequiredArgsConstructor

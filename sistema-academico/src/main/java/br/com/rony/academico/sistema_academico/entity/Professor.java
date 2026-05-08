@@ -3,11 +3,6 @@ package br.com.rony.academico.sistema_academico.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-/**
- * Entidade que representa um professor no sistema acadêmico.
- * Responsável por vincular um usuário ao papel docente.
- * Relacionamentos: OneToOne com Usuario.
- */
 @Entity
 @Table(name = "pro_professor", schema = "academico")
 @Getter

@@ -1,20 +1,17 @@
-package br.com.rony.academico.sistema_academico.service;
+package br.com.rony.academico.sistema_academico.service.impl;
 
 import br.com.rony.academico.sistema_academico.dto.request.UsuarioRequestDTO;
 import br.com.rony.academico.sistema_academico.dto.response.UsuarioResponseDTO;
 import br.com.rony.academico.sistema_academico.entity.Usuario;
 import br.com.rony.academico.sistema_academico.mapper.UsuarioMapper;
 import br.com.rony.academico.sistema_academico.repository.UsuarioRepository;
+import br.com.rony.academico.sistema_academico.service.UsuarioService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * Implementação do serviço de gerenciamento de usuários.
- * Contém regras de negócio relacionadas a usuários do sistema.
- */
 @Service
 @RequiredArgsConstructor
 public class UsuarioServiceImpl implements UsuarioService {

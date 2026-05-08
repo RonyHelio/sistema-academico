@@ -5,9 +5,6 @@ import br.com.rony.academico.sistema_academico.dto.response.DisciplinaResponseDT
 
 import java.util.List;
 
-/**
- * Interface de serviço para gerenciamento de disciplinas.
- */
 public interface DisciplinaService {
 
     DisciplinaResponseDTO salvar(DisciplinaRequestDTO dto);

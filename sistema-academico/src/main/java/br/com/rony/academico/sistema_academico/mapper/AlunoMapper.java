@@ -6,9 +6,6 @@ import br.com.rony.academico.sistema_academico.entity.Aluno;
 import br.com.rony.academico.sistema_academico.entity.Curso;
 import br.com.rony.academico.sistema_academico.entity.Usuario;
 
-/**
- * Mapper responsável pela conversão entre Aluno e seus DTOs.
- */
 public class AlunoMapper {
 
     public static Aluno toEntity(AlunoRequestDTO dto, Usuario usuario, Curso curso) {

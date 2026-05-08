@@ -4,9 +4,6 @@ import br.com.rony.academico.sistema_academico.dto.request.CursoRequestDTO;
 import br.com.rony.academico.sistema_academico.dto.response.CursoResponseDTO;
 import br.com.rony.academico.sistema_academico.entity.Curso;
 
-/**
- * Mapper responsável pela conversão entre Curso e seus DTOs.
- */
 public class CursoMapper {
 
     public static Curso toEntity(CursoRequestDTO dto) {

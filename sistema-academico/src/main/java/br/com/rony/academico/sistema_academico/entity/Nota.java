@@ -5,11 +5,6 @@ import lombok.*;
 
 import java.math.BigDecimal;
 
-/**
- * Entidade que representa uma nota de um aluno em uma turma.
- * Responsável por armazenar avaliações e notas acadêmicas.
- * Relacionamentos: ManyToOne com MatriculaTurma.
- */
 @Entity
 @Table(name = "not_nota", schema = "academico")
 @Getter

@@ -1,4 +1,4 @@
-package br.com.rony.academico.sistema_academico.service;
+package br.com.rony.academico.sistema_academico.service.impl;
 
 import br.com.rony.academico.sistema_academico.dto.request.FaltaRequestDTO;
 import br.com.rony.academico.sistema_academico.dto.response.FaltaResponseDTO;
@@ -7,16 +7,13 @@ import br.com.rony.academico.sistema_academico.entity.MatriculaTurma;
 import br.com.rony.academico.sistema_academico.mapper.FaltaMapper;
 import br.com.rony.academico.sistema_academico.repository.FaltaRepository;
 import br.com.rony.academico.sistema_academico.repository.MatriculaTurmaRepository;
+import br.com.rony.academico.sistema_academico.service.FaltaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * Implementação do serviço de gerenciamento de faltas.
- * Contém regras de negócio para lançamento de faltas.
- */
 @Service
 @RequiredArgsConstructor
 public class FaltaServiceImpl implements FaltaService {

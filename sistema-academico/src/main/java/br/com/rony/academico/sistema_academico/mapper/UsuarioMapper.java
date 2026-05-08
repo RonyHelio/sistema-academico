@@ -6,9 +6,6 @@ import br.com.rony.academico.sistema_academico.entity.Usuario;
 
 import java.time.LocalDateTime;
 
-/**
- * Mapper responsável pela conversão entre Usuario e seus DTOs.
- */
 public class UsuarioMapper {
 
     public static Usuario toEntity(UsuarioRequestDTO dto) {

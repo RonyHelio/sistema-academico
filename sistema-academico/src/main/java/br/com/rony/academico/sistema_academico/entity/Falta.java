@@ -5,11 +5,6 @@ import lombok.*;
 
 import java.time.LocalDate;
 
-/**
- * Entidade que representa uma falta de um aluno em uma turma.
- * Responsável por registrar ausências com data e justificativa.
- * Relacionamentos: ManyToOne com MatriculaTurma.
- */
 @Entity
 @Table(name = "fal_falta", schema = "academico")
 @Getter

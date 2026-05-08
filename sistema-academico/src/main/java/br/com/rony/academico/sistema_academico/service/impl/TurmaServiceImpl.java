@@ -1,4 +1,4 @@
-package br.com.rony.academico.sistema_academico.service;
+package br.com.rony.academico.sistema_academico.service.impl;
 
 import br.com.rony.academico.sistema_academico.dto.request.TurmaRequestDTO;
 import br.com.rony.academico.sistema_academico.dto.response.TurmaResponseDTO;
@@ -9,16 +9,13 @@ import br.com.rony.academico.sistema_academico.mapper.TurmaMapper;
 import br.com.rony.academico.sistema_academico.repository.DisciplinaRepository;
 import br.com.rony.academico.sistema_academico.repository.ProfessorRepository;
 import br.com.rony.academico.sistema_academico.repository.TurmaRepository;
+import br.com.rony.academico.sistema_academico.service.TurmaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * Implementação do serviço de gerenciamento de turmas.
- * Contém regras de negócio relacionadas a turmas.
- */
 @Service
 @RequiredArgsConstructor
 public class TurmaServiceImpl implements TurmaService {

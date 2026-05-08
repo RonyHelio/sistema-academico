@@ -3,11 +3,6 @@ package br.com.rony.academico.sistema_academico.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-/**
- * Entidade que representa um aluno no sistema acadêmico.
- * Responsável por vincular um usuário a um curso com matrícula.
- * Relacionamentos: OneToOne com Usuario, ManyToOne com Curso.
- */
 @Entity
 @Table(name = "alu_aluno", schema = "academico")
 @Getter

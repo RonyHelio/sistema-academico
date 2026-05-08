@@ -5,9 +5,6 @@ import br.com.rony.academico.sistema_academico.dto.response.UsuarioResponseDTO;
 
 import java.util.List;
 
-/**
- * Interface de serviço para gerenciamento de usuários.
- */
 public interface UsuarioService {
 
     UsuarioResponseDTO salvar(UsuarioRequestDTO dto);

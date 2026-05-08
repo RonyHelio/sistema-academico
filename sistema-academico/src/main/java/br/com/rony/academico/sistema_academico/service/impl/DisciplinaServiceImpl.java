@@ -1,20 +1,17 @@
-package br.com.rony.academico.sistema_academico.service;
+package br.com.rony.academico.sistema_academico.service.impl;
 
 import br.com.rony.academico.sistema_academico.dto.request.DisciplinaRequestDTO;
 import br.com.rony.academico.sistema_academico.dto.response.DisciplinaResponseDTO;
 import br.com.rony.academico.sistema_academico.entity.Disciplina;
 import br.com.rony.academico.sistema_academico.mapper.DisciplinaMapper;
 import br.com.rony.academico.sistema_academico.repository.DisciplinaRepository;
+import br.com.rony.academico.sistema_academico.service.DisciplinaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * Implementação do serviço de gerenciamento de disciplinas.
- * Contém regras de negócio relacionadas a disciplinas.
- */
 @Service
 @RequiredArgsConstructor
 public class DisciplinaServiceImpl implements DisciplinaService {

@@ -3,11 +3,6 @@ package br.com.rony.academico.sistema_academico.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-/**
- * Entidade intermediária que representa a matrícula de um aluno em uma turma.
- * Criada para evitar @ManyToMany direto, conforme orientações do projeto.
- * Relacionamentos: ManyToOne com Aluno e ManyToOne com Turma.
- */
 @Entity
 @Table(name = "mtr_matricula_turma", schema = "academico")
 @Getter

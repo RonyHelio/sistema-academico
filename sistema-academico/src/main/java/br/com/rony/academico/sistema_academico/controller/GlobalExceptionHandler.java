@@ -8,9 +8,6 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.Map;
 
-/**
- * Handler global de exceções para padronização de respostas de erro.
- */
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 

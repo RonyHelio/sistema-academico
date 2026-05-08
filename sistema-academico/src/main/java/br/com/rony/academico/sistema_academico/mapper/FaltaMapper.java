@@ -5,9 +5,6 @@ import br.com.rony.academico.sistema_academico.dto.response.FaltaResponseDTO;
 import br.com.rony.academico.sistema_academico.entity.Falta;
 import br.com.rony.academico.sistema_academico.entity.MatriculaTurma;
 
-/**
- * Mapper responsável pela conversão entre Falta e seus DTOs.
- */
 public class FaltaMapper {
 
     public static Falta toEntity(FaltaRequestDTO dto, MatriculaTurma matriculaTurma) {

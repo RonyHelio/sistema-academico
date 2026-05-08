@@ -1,4 +1,4 @@
-package br.com.rony.academico.sistema_academico.service;
+package br.com.rony.academico.sistema_academico.service.impl;
 
 import br.com.rony.academico.sistema_academico.dto.request.AlunoRequestDTO;
 import br.com.rony.academico.sistema_academico.dto.response.AlunoResponseDTO;
@@ -9,16 +9,13 @@ import br.com.rony.academico.sistema_academico.mapper.AlunoMapper;
 import br.com.rony.academico.sistema_academico.repository.AlunoRepository;
 import br.com.rony.academico.sistema_academico.repository.CursoRepository;
 import br.com.rony.academico.sistema_academico.repository.UsuarioRepository;
+import br.com.rony.academico.sistema_academico.service.AlunoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * Implementação do serviço de gerenciamento de alunos.
- * Contém regras de negócio relacionadas a alunos.
- */
 @Service
 @RequiredArgsConstructor
 public class AlunoServiceImpl implements AlunoService {

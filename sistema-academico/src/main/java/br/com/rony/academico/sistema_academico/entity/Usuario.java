@@ -5,11 +5,6 @@ import lombok.*;
 
 import java.time.LocalDateTime;
 
-/**
- * Entidade que representa um usuário do sistema acadêmico.
- * Responsável por armazenar dados de autenticação e identificação.
- * Relacionamentos: base para Aluno e Professor (OneToOne).
- */
 @Entity
 @Table(name = "usu_usuario", schema = "academico")
 @Getter

@@ -1,20 +1,17 @@
-package br.com.rony.academico.sistema_academico.service;
+package br.com.rony.academico.sistema_academico.service.impl;
 
 import br.com.rony.academico.sistema_academico.dto.request.CursoRequestDTO;
 import br.com.rony.academico.sistema_academico.dto.response.CursoResponseDTO;
 import br.com.rony.academico.sistema_academico.entity.Curso;
 import br.com.rony.academico.sistema_academico.mapper.CursoMapper;
 import br.com.rony.academico.sistema_academico.repository.CursoRepository;
+import br.com.rony.academico.sistema_academico.service.CursoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * Implementação do serviço de gerenciamento de cursos.
- * Contém regras de negócio relacionadas a cursos.
- */
 @Service
 @RequiredArgsConstructor
 public class CursoServiceImpl implements CursoService {
