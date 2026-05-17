@@ -7,13 +7,11 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class TurmaResponseDTO {
+public class PeriodoLetivoResponseDTO {
 
     private Long id;
-    private String nomeDisciplina;
-    private String nomeProfessor;
-    private Long periodoLetivoId;
-    private String periodoLetivoDescricao;
+    private Integer ano;
+    private Integer semestre;
     private String descricao;
     private String status;
 }

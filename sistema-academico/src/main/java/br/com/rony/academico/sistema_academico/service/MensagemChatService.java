@@ -7,7 +7,9 @@ import java.util.List;
 
 public interface MensagemChatService {
 
-    MensagemChatResponseDTO enviarMensagem(MensagemChatRequestDTO dto);
+    MensagemChatResponseDTO enviarMensagem(MensagemChatRequestDTO dto, Long usuarioId);
 
-    List<MensagemChatResponseDTO> listarMensagensDoChat(Long chatTurmaId);
+    List<MensagemChatResponseDTO> listarMensagensDoChat(Long chatTurmaId, Long usuarioId);
+
+    void inativar(Long id, Long usuarioId);
 }

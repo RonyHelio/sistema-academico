@@ -18,12 +18,18 @@ public class MensagemChatController {
     private final MensagemChatService mensagemChatService;
 
     @PostMapping
-    public ResponseEntity<MensagemChatResponseDTO> enviarMensagem(@Valid @RequestBody MensagemChatRequestDTO dto) {
-        return ResponseEntity.ok(mensagemChatService.enviarMensagem(dto));
+    public ResponseEntity<MensagemChatResponseDTO> enviarMensagem(@Valid @RequestBody MensagemChatRequestDTO dto, @RequestHeader("usuario-id") Long usuarioId) {
+        return ResponseEntity.ok(mensagemChatService.enviarMensagem(dto, usuarioId));
     }
 
     @GetMapping("/chat/{chatTurmaId}")
-    public ResponseEntity<List<MensagemChatResponseDTO>> listarMensagens(@PathVariable Long chatTurmaId) {
-        return ResponseEntity.ok(mensagemChatService.listarMensagensDoChat(chatTurmaId));
+    public ResponseEntity<List<MensagemChatResponseDTO>> listarMensagens(@PathVariable Long chatTurmaId, @RequestHeader("usuario-id") Long usuarioId) {
+        return ResponseEntity.ok(mensagemChatService.listarMensagensDoChat(chatTurmaId, usuarioId));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> inativar(@PathVariable Long id, @RequestHeader("usuario-id") Long usuarioId) {
+        mensagemChatService.inativar(id, usuarioId);
+        return ResponseEntity.noContent().build();
     }
 }

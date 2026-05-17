@@ -4,9 +4,11 @@ import br.com.rony.academico.sistema_academico.dto.request.NotaRequestDTO;
 import br.com.rony.academico.sistema_academico.dto.response.NotaResponseDTO;
 import br.com.rony.academico.sistema_academico.entity.MatriculaTurma;
 import br.com.rony.academico.sistema_academico.entity.Nota;
+import br.com.rony.academico.sistema_academico.entity.Usuario;
 import br.com.rony.academico.sistema_academico.mapper.NotaMapper;
 import br.com.rony.academico.sistema_academico.repository.MatriculaTurmaRepository;
 import br.com.rony.academico.sistema_academico.repository.NotaRepository;
+import br.com.rony.academico.sistema_academico.repository.UsuarioRepository;
 import br.com.rony.academico.sistema_academico.service.NotaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,9 +22,12 @@ public class NotaServiceImpl implements NotaService {
 
     private final NotaRepository notaRepository;
     private final MatriculaTurmaRepository matriculaTurmaRepository;
+    private final UsuarioRepository usuarioRepository;
 
     @Override
-    public NotaResponseDTO salvar(NotaRequestDTO dto) {
+    public NotaResponseDTO salvar(NotaRequestDTO dto, Long usuarioId) {
+        validarProfessorOuCoordenador(usuarioId);
+
         MatriculaTurma matricula = matriculaTurmaRepository.findById(dto.getMatriculaTurmaId())
                 .orElseThrow(() -> new RuntimeException("Matrícula na turma não encontrada."));
 
@@ -40,10 +45,19 @@ public class NotaServiceImpl implements NotaService {
     }
 
     @Override
-    public void inativar(Long id) {
+    public void inativar(Long id, Long usuarioId) {
+        validarProfessorOuCoordenador(usuarioId);
         Nota nota = notaRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Nota não encontrada."));
         nota.setStatus("I");
         notaRepository.save(nota);
+    }
+
+    private void validarProfessorOuCoordenador(Long usuarioId) {
+        Usuario solicitante = usuarioRepository.findById(usuarioId)
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado."));
+        if (!"PROFESSOR".equals(solicitante.getPerfil()) && !"COORDENADOR".equals(solicitante.getPerfil())) {
+            throw new RuntimeException("Acesso negado. Apenas professores ou coordenadores podem realizar esta operação.");
+        }
     }
 }

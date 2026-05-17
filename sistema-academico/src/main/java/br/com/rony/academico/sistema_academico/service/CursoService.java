@@ -7,13 +7,13 @@ import java.util.List;
 
 public interface CursoService {
 
-    CursoResponseDTO salvar(CursoRequestDTO dto);
+    CursoResponseDTO salvar(CursoRequestDTO dto, Long usuarioId);
 
     CursoResponseDTO buscarPorId(Long id);
 
     List<CursoResponseDTO> listarTodos();
 
-    CursoResponseDTO atualizar(Long id, CursoRequestDTO dto);
+    CursoResponseDTO atualizar(Long id, CursoRequestDTO dto, Long usuarioId);
 
-    void inativar(Long id);
+    void inativar(Long id, Long usuarioId);
 }

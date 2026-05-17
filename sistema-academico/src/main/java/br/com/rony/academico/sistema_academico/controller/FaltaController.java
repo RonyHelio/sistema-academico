@@ -18,8 +18,8 @@ public class FaltaController {
     private final FaltaService faltaService;
 
     @PostMapping
-    public ResponseEntity<FaltaResponseDTO> salvar(@Valid @RequestBody FaltaRequestDTO dto) {
-        return ResponseEntity.ok(faltaService.salvar(dto));
+    public ResponseEntity<FaltaResponseDTO> salvar(@Valid @RequestBody FaltaRequestDTO dto, @RequestHeader("usuario-id") Long usuarioId) {
+        return ResponseEntity.ok(faltaService.salvar(dto, usuarioId));
     }
 
     @GetMapping("/matricula/{matriculaTurmaId}")
@@ -28,8 +28,8 @@ public class FaltaController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> inativar(@PathVariable Long id) {
-        faltaService.inativar(id);
+    public ResponseEntity<Void> inativar(@PathVariable Long id, @RequestHeader("usuario-id") Long usuarioId) {
+        faltaService.inativar(id, usuarioId);
         return ResponseEntity.noContent().build();
     }
 }

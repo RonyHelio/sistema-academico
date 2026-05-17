@@ -19,7 +19,8 @@ public class UsuarioServiceImpl implements UsuarioService {
     private final UsuarioRepository usuarioRepository;
 
     @Override
-    public UsuarioResponseDTO salvar(UsuarioRequestDTO dto) {
+    public UsuarioResponseDTO salvar(UsuarioRequestDTO dto, Long usuarioId) {
+        validarCoordenador(usuarioId);
         Usuario usuario = UsuarioMapper.toEntity(dto);
         Usuario salvo = usuarioRepository.save(usuario);
         return UsuarioMapper.toDTO(salvo);
@@ -41,7 +42,8 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
-    public UsuarioResponseDTO atualizar(Long id, UsuarioRequestDTO dto) {
+    public UsuarioResponseDTO atualizar(Long id, UsuarioRequestDTO dto, Long usuarioId) {
+        validarCoordenador(usuarioId);
         Usuario usuario = usuarioRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado."));
 
@@ -56,10 +58,19 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
-    public void inativar(Long id) {
+    public void inativar(Long id, Long usuarioId) {
+        validarCoordenador(usuarioId);
         Usuario usuario = usuarioRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado."));
         usuario.setStatus("I");
         usuarioRepository.save(usuario);
+    }
+
+    private void validarCoordenador(Long usuarioId) {
+        Usuario solicitante = usuarioRepository.findById(usuarioId)
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado."));
+        if (!"COORDENADOR".equals(solicitante.getPerfil())) {
+            throw new RuntimeException("Acesso negado. Apenas coordenadores podem realizar esta operação.");
+        }
     }
 }

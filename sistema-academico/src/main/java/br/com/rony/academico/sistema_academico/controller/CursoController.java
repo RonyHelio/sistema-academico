@@ -18,8 +18,8 @@ public class CursoController {
     private final CursoService cursoService;
 
     @PostMapping
-    public ResponseEntity<CursoResponseDTO> salvar(@Valid @RequestBody CursoRequestDTO dto) {
-        return ResponseEntity.ok(cursoService.salvar(dto));
+    public ResponseEntity<CursoResponseDTO> salvar(@Valid @RequestBody CursoRequestDTO dto, @RequestHeader("usuario-id") Long usuarioId) {
+        return ResponseEntity.ok(cursoService.salvar(dto, usuarioId));
     }
 
     @GetMapping("/{id}")
@@ -33,13 +33,13 @@ public class CursoController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<CursoResponseDTO> atualizar(@PathVariable Long id, @Valid @RequestBody CursoRequestDTO dto) {
-        return ResponseEntity.ok(cursoService.atualizar(id, dto));
+    public ResponseEntity<CursoResponseDTO> atualizar(@PathVariable Long id, @Valid @RequestBody CursoRequestDTO dto, @RequestHeader("usuario-id") Long usuarioId) {
+        return ResponseEntity.ok(cursoService.atualizar(id, dto, usuarioId));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> inativar(@PathVariable Long id) {
-        cursoService.inativar(id);
+    public ResponseEntity<Void> inativar(@PathVariable Long id, @RequestHeader("usuario-id") Long usuarioId) {
+        cursoService.inativar(id, usuarioId);
         return ResponseEntity.noContent().build();
     }
 }

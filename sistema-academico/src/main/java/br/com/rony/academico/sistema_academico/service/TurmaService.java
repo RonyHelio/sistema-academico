@@ -7,13 +7,13 @@ import java.util.List;
 
 public interface TurmaService {
 
-    TurmaResponseDTO salvar(TurmaRequestDTO dto);
+    TurmaResponseDTO salvar(TurmaRequestDTO dto, Long usuarioId);
 
     TurmaResponseDTO buscarPorId(Long id);
 
     List<TurmaResponseDTO> listarTodas();
 
-    TurmaResponseDTO atualizar(Long id, TurmaRequestDTO dto);
+    TurmaResponseDTO atualizar(Long id, TurmaRequestDTO dto, Long usuarioId);
 
-    void inativar(Long id);
+    void inativar(Long id, Long usuarioId);
 }

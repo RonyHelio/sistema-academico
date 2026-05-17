@@ -7,13 +7,13 @@ import java.util.List;
 
 public interface UsuarioService {
 
-    UsuarioResponseDTO salvar(UsuarioRequestDTO dto);
+    UsuarioResponseDTO salvar(UsuarioRequestDTO dto, Long usuarioId);
 
     UsuarioResponseDTO buscarPorId(Long id);
 
     List<UsuarioResponseDTO> listarTodos();
 
-    UsuarioResponseDTO atualizar(Long id, UsuarioRequestDTO dto);
+    UsuarioResponseDTO atualizar(Long id, UsuarioRequestDTO dto, Long usuarioId);
 
-    void inativar(Long id);
+    void inativar(Long id, Long usuarioId);
 }

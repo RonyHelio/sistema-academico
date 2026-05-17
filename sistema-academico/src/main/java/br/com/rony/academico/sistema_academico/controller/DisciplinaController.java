@@ -18,8 +18,8 @@ public class DisciplinaController {
     private final DisciplinaService disciplinaService;
 
     @PostMapping
-    public ResponseEntity<DisciplinaResponseDTO> salvar(@Valid @RequestBody DisciplinaRequestDTO dto) {
-        return ResponseEntity.ok(disciplinaService.salvar(dto));
+    public ResponseEntity<DisciplinaResponseDTO> salvar(@Valid @RequestBody DisciplinaRequestDTO dto, @RequestHeader("usuario-id") Long usuarioId) {
+        return ResponseEntity.ok(disciplinaService.salvar(dto, usuarioId));
     }
 
     @GetMapping("/{id}")
@@ -33,13 +33,13 @@ public class DisciplinaController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<DisciplinaResponseDTO> atualizar(@PathVariable Long id, @Valid @RequestBody DisciplinaRequestDTO dto) {
-        return ResponseEntity.ok(disciplinaService.atualizar(id, dto));
+    public ResponseEntity<DisciplinaResponseDTO> atualizar(@PathVariable Long id, @Valid @RequestBody DisciplinaRequestDTO dto, @RequestHeader("usuario-id") Long usuarioId) {
+        return ResponseEntity.ok(disciplinaService.atualizar(id, dto, usuarioId));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> inativar(@PathVariable Long id) {
-        disciplinaService.inativar(id);
+    public ResponseEntity<Void> inativar(@PathVariable Long id, @RequestHeader("usuario-id") Long usuarioId) {
+        disciplinaService.inativar(id, usuarioId);
         return ResponseEntity.noContent().build();
     }
 }

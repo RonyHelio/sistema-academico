@@ -5,6 +5,7 @@ import lombok.*;
 
 import java.math.BigDecimal;
 
+
 @Entity
 @Table(name = "not_nota", schema = "academico")
 @Getter
@@ -12,6 +13,8 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+
+
 public class Nota {
 
     @Id

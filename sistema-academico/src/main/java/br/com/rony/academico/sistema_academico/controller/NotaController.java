@@ -18,8 +18,8 @@ public class NotaController {
     private final NotaService notaService;
 
     @PostMapping
-    public ResponseEntity<NotaResponseDTO> salvar(@Valid @RequestBody NotaRequestDTO dto) {
-        return ResponseEntity.ok(notaService.salvar(dto));
+    public ResponseEntity<NotaResponseDTO> salvar(@Valid @RequestBody NotaRequestDTO dto, @RequestHeader("usuario-id") Long usuarioId) {
+        return ResponseEntity.ok(notaService.salvar(dto, usuarioId));
     }
 
     @GetMapping("/matricula/{matriculaTurmaId}")
@@ -28,8 +28,8 @@ public class NotaController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> inativar(@PathVariable Long id) {
-        notaService.inativar(id);
+    public ResponseEntity<Void> inativar(@PathVariable Long id, @RequestHeader("usuario-id") Long usuarioId) {
+        notaService.inativar(id, usuarioId);
         return ResponseEntity.noContent().build();
     }
 }

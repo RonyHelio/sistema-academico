@@ -25,8 +25,9 @@ public class Turma {
     @JoinColumn(name = "pro_nr_id")
     private Professor professor;
 
-    @Column(name = "pel_nr_id", nullable = false)
-    private Long periodoLetivoId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "pel_nr_id", nullable = false)
+    private PeriodoLetivo periodoLetivo;
 
     @Column(name = "tur_tx_descricao", nullable = false)
     private String descricao;

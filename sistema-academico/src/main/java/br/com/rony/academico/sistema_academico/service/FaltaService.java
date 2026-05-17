@@ -7,9 +7,9 @@ import java.util.List;
 
 public interface FaltaService {
 
-    FaltaResponseDTO salvar(FaltaRequestDTO dto);
+    FaltaResponseDTO salvar(FaltaRequestDTO dto, Long usuarioId);
 
     List<FaltaResponseDTO> listarPorMatriculaTurma(Long matriculaTurmaId);
 
-    void inativar(Long id);
+    void inativar(Long id, Long usuarioId);
 }

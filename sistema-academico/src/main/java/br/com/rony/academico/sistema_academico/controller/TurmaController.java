@@ -18,8 +18,8 @@ public class TurmaController {
     private final TurmaService turmaService;
 
     @PostMapping
-    public ResponseEntity<TurmaResponseDTO> salvar(@Valid @RequestBody TurmaRequestDTO dto) {
-        return ResponseEntity.ok(turmaService.salvar(dto));
+    public ResponseEntity<TurmaResponseDTO> salvar(@Valid @RequestBody TurmaRequestDTO dto, @RequestHeader("usuario-id") Long usuarioId) {
+        return ResponseEntity.ok(turmaService.salvar(dto, usuarioId));
     }
 
     @GetMapping("/{id}")
@@ -33,13 +33,13 @@ public class TurmaController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<TurmaResponseDTO> atualizar(@PathVariable Long id, @Valid @RequestBody TurmaRequestDTO dto) {
-        return ResponseEntity.ok(turmaService.atualizar(id, dto));
+    public ResponseEntity<TurmaResponseDTO> atualizar(@PathVariable Long id, @Valid @RequestBody TurmaRequestDTO dto, @RequestHeader("usuario-id") Long usuarioId) {
+        return ResponseEntity.ok(turmaService.atualizar(id, dto, usuarioId));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> inativar(@PathVariable Long id) {
-        turmaService.inativar(id);
+    public ResponseEntity<Void> inativar(@PathVariable Long id, @RequestHeader("usuario-id") Long usuarioId) {
+        turmaService.inativar(id, usuarioId);
         return ResponseEntity.noContent().build();
     }
 }

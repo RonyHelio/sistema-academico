@@ -3,16 +3,17 @@ package br.com.rony.academico.sistema_academico.mapper;
 import br.com.rony.academico.sistema_academico.dto.request.TurmaRequestDTO;
 import br.com.rony.academico.sistema_academico.dto.response.TurmaResponseDTO;
 import br.com.rony.academico.sistema_academico.entity.Disciplina;
+import br.com.rony.academico.sistema_academico.entity.PeriodoLetivo;
 import br.com.rony.academico.sistema_academico.entity.Professor;
 import br.com.rony.academico.sistema_academico.entity.Turma;
 
 public class TurmaMapper {
 
-    public static Turma toEntity(TurmaRequestDTO dto, Disciplina disciplina, Professor professor) {
+    public static Turma toEntity(TurmaRequestDTO dto, Disciplina disciplina, Professor professor, PeriodoLetivo periodoLetivo) {
         return Turma.builder()
                 .disciplina(disciplina)
                 .professor(professor)
-                .periodoLetivoId(dto.getPeriodoLetivoId())
+                .periodoLetivo(periodoLetivo)
                 .descricao(dto.getDescricao())
                 .codigoSuap(dto.getCodigoSuap())
                 .status("A")
@@ -24,7 +25,8 @@ public class TurmaMapper {
                 .id(entity.getId())
                 .nomeDisciplina(entity.getDisciplina().getNome())
                 .nomeProfessor(entity.getProfessor() != null ? entity.getProfessor().getUsuario().getNome() : null)
-                .periodoLetivoId(entity.getPeriodoLetivoId())
+                .periodoLetivoId(entity.getPeriodoLetivo().getId())
+                .periodoLetivoDescricao(entity.getPeriodoLetivo().getDescricao())
                 .descricao(entity.getDescricao())
                 .status(entity.getStatus())
                 .build();

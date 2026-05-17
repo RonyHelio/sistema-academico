@@ -7,9 +7,9 @@ import java.util.List;
 
 public interface NotaService {
 
-    NotaResponseDTO salvar(NotaRequestDTO dto);
+    NotaResponseDTO salvar(NotaRequestDTO dto, Long usuarioId);
 
     List<NotaResponseDTO> listarPorMatriculaTurma(Long matriculaTurmaId);
 
-    void inativar(Long id);
+    void inativar(Long id, Long usuarioId);
 }
