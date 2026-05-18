@@ -36,6 +36,19 @@ Estes são os IDs reais inseridos pelo Flyway no banco de dados, que já estão 
 | **1** | Turma 1 (Estrutura de Dados) |
 | **2** | Turma 2 (Programação Web) |
 
+### 📝 Notas (Alguns exemplos já inseridos)
+| ID | Matrícula Turma | Aluno | Descrição | Valor |
+| :--- | :--- | :--- | :--- | :--- |
+| **1** | 1 | Aluno Exemplo | Prova 1 | 7.50 |
+| **2** | 1 | Aluno Exemplo | Prova 2 | 8.00 |
+| **3** | 1 | Aluno Exemplo | Trabalho Final | 9.00 |
+
+### ❌ Faltas (Alguns exemplos já inseridos)
+| ID | Matrícula Turma | Aluno | Data | Quantidade | Justificativa / Observação |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **1** | 1 | Aluno Exemplo | 2026-03-10 | 2 | Ausencia justificada |
+| **2** | 1 | Aluno Exemplo | 2026-04-05 | 1 | N/A |
+
 ---
 
 ## 2. Endpoints da API
