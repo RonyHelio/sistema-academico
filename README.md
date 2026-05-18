@@ -2,240 +2,202 @@
 
 Bem-vindo ao repositório do Sistema Acadêmico. 
 
-Abaixo você encontra a documentação oficial para realizar testes de integração via Postman (ou outra ferramenta de API Client), baseada nos dados iniciais (SEED) populados pelas migrations do Flyway (`V2` a `V5`).
+Abaixo encontra-se a documentação oficial e exaustiva para realizar testes de integração via Postman (ou outra ferramenta de API Client), baseada nos dados iniciais (SEED) populados pelas migrations do Flyway (`V2` a `V5`).
 
 ---
 
 ## 1. Dados Iniciais para Teste (Seed IDs)
 
-Estes são os IDs reais inseridos pelo Flyway no banco de dados, que já estão prontos para uso.
+Estes são os IDs reais inseridos pelo Flyway no banco de dados, prontos para uso sem quebrar chaves de integridade relacional.
 
 ### 👤 Usuários
 | ID (`usuarioId`) | Nome | Perfil | Observação |
 | :--- | :--- | :--- | :--- |
 | **1** | Coordenador Geral | `COORDENADOR` | Tem acesso total a cadastros e exclusões lógicas. |
 | **2** | Professor Carlos | `PROFESSOR` | ID do Professor: `1`. Pode lançar Notas e Faltas. |
-| **3** | Aluno Exemplo | `ALUNO` | ID do Aluno: `1` (Matrícula: 20261001). Só consulta próprios dados. |
+| **3** | Aluno Exemplo | `ALUNO` | ID do Aluno: `1` (Matrícula: 20261001). |
+| **4** | Professora Maria | `PROFESSOR` | ID do Professor: `2`. |
 | **5** | Joao Silva | `ALUNO` | ID do Aluno: `2` (Matrícula: 20261002). |
+| **6** | Ana Souza | `ALUNO` | ID do Aluno: `3` (Matrícula: 20261003). |
+| **7** | Aluno Teste Postman| `ALUNO` | Sem `alu_nr_id` vinculado (Excelente para teste de POST Aluno). |
 
-### 🏫 Turmas e Disciplinas
+### 🎓 Cursos
+| ID | Nome |
+| :--- | :--- |
+| **1** | Sistemas de Informação |
+| **2** | Ciência da Computação |
+| **3** | Engenharia de Software |
+
+### 📚 Disciplinas
+| ID | Nome | Código |
+| :--- | :--- | :--- |
+| **1** | Estrutura de Dados | ED101 |
+| **2** | Programação Web | PW01 |
+| **3** | Banco de Dados | BD01 |
+
+### 📅 Períodos Letivos
+| ID | Descrição |
+| :--- | :--- |
+| **1** | 2026.1 |
+| **2** | 2025.2 |
+
+### 🏫 Turmas
 | ID Turma | Disciplina | Período Letivo | Professor |
 | :--- | :--- | :--- | :--- |
 | **1** | Estrutura de Dados (ID 1) | 2026.1 (ID 1) | Professor Carlos (ID 1) |
 | **2** | Programação Web (ID 2) | 2026.1 (ID 1) | Professor Carlos (ID 1) |
+| **3** | Banco de Dados (ID 3) | 2026.1 (ID 1) | Professora Maria (ID 2) |
 
 ### 📋 Matrículas
 | ID (`matriculaTurmaId`) | Aluno | Turma |
 | :--- | :--- | :--- |
-| **1** | Aluno Exemplo (ID Aluno 1) | Turma 1 (Estrutura de Dados) |
-| **2** | Aluno Exemplo (ID Aluno 1) | Turma 2 (Programação Web) |
+| **1** | Aluno Exemplo (ID 3) | Turma 1 |
+| **2** | Aluno Exemplo (ID 3) | Turma 2 |
+| **3** | Joao Silva (ID 5) | Turma 1 |
+| **4** | Joao Silva (ID 5) | Turma 2 |
+| **5** | Ana Souza (ID 6) | Turma 1 |
+| **6** | Ana Souza (ID 6) | Turma 3 |
 
 ### 💬 Chats
 | ID (`chatTurmaId`) | Turma Relacionada |
 | :--- | :--- |
 | **1** | Turma 1 (Estrutura de Dados) |
 | **2** | Turma 2 (Programação Web) |
+| **3** | Turma 3 (Banco de Dados) |
 
-### 📝 Notas (Alguns exemplos já inseridos)
-| ID | Matrícula Turma | Aluno | Descrição | Valor |
-| :--- | :--- | :--- | :--- | :--- |
-| **1** | 1 | Aluno Exemplo | Prova 1 | 7.50 |
-| **2** | 1 | Aluno Exemplo | Prova 2 | 8.00 |
-| **3** | 1 | Aluno Exemplo | Trabalho Final | 9.00 |
-
-### ❌ Faltas (Alguns exemplos já inseridos)
-| ID | Matrícula Turma | Aluno | Data | Quantidade | Justificativa / Observação |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| **1** | 1 | Aluno Exemplo | 2026-03-10 | 2 | Ausencia justificada |
-| **2** | 1 | Aluno Exemplo | 2026-04-05 | 1 | N/A |
+### 📝 Notas e Faltas (Alguns exemplos já inseridos para Matrícula ID 1)
+| Matrícula ID | Lançamentos Feitos |
+| :--- | :--- |
+| **1** | Notas: Prova 1 (7.5), Prova 2 (8.0), Trabalho (9.0) <br> Faltas: 2 em 2026-03-10, 1 em 2026-04-05 |
 
 ---
 
-## 2. Endpoints da API
+## 2. Autenticação e Perfis
 
-Abaixo encontram-se os principais fluxos documentados para envio de JSON e configuração de Headers no Postman.
+Todas as requisições que alteram estado (POST, PUT, DELETE) e algumas de GET exigem a passagem do **Header** `usuario-id` simulando o usuário logado no sistema. 
 
-### 🟢 Usuários (`/api/usuarios`)
-
-**1. Cadastrar Usuário**
-* **Método:** `POST`
-* **URL:** `http://localhost:8080/api/usuarios`
-* **Autorização:** Apenas `COORDENADOR`
-* **Headers:** 
-  * `usuario-id`: `1`
-* **Body (JSON):**
-```json
-{
-  "nome": "Novo Usuário",
-  "email": "novo@campus.edu.br",
-  "login": "novo.user",
-  "senha": "123",
-  "perfil": "PROFESSOR"
-}
-```
-
-**2. Listar Todos os Usuários**
-* **Método:** `GET`
-* **URL:** `http://localhost:8080/api/usuarios`
-* **Autorização:** Sem restrição explícita de perfil.
+- O valor `1` sempre concederá privilégios de **COORDENADOR**.
+- O valor `2` e `4` concederá privilégios de **PROFESSOR**.
+- Os valores `3`, `5`, `6` e `7` representam acessos de **ALUNO**.
 
 ---
 
-### 🟢 Alunos (`/api/alunos`)
+## 3. Endpoints da API (CRUD Completo)
 
-**1. Cadastrar Aluno**
-* **Método:** `POST`
-* **URL:** `http://localhost:8080/api/alunos`
-* **Autorização:** Apenas `COORDENADOR`
-* **Headers:** 
-  * `usuario-id`: `1`
-* **Body (JSON):** *(Nota: O `usuarioId` no body precisa ser de um usuário existente que ainda não seja aluno. O `cursoId` 1 representa Sistemas de Informação)*
-```json
-{
-  "usuarioId": 7,
-  "cursoId": 1,
-  "matricula": "20261010"
-}
-```
+### 🟢 1. Usuários (`/api/usuarios`)
 
-**2. Boletim / Situação do Aluno**
-* **Método:** `GET`
-* **URL:** `http://localhost:8080/api/alunos/1/situacao`
-* **Autorização:** `COORDENADOR`, `PROFESSOR`, ou o próprio `ALUNO` logado (Header `usuario-id` deve pertencer ao próprio Aluno se o perfil for ALUNO).
-* **Headers:** 
-  * `usuario-id`: `3` (O próprio Aluno Exemplo consultando a si mesmo) ou `1` (Coordenador).
-* **Resposta Esperada (200 OK):**
-```json
-[
-  {
-    "turmaId": 1,
-    "nomeDisciplina": "Estrutura de Dados",
-    "descricaoTurma": "Turma A - Estrutura de Dados",
-    "periodoLetivo": "2026.1",
-    "mediaNotas": 8.17,
-    "totalFaltas": 3,
-    "situacao": "CURSANDO"
-  }
-]
-```
+*   `POST /api/usuarios` (Apenas `COORDENADOR`) - Header: `usuario-id: 1`
+    ```json
+    { "nome": "Teste", "email": "teste@email.com", "login": "teste", "senha": "123", "perfil": "PROFESSOR" }
+    ```
+*   `GET /api/usuarios` (Acesso livre)
+*   `GET /api/usuarios/{id}` (Acesso livre)
+*   `PUT /api/usuarios/{id}` (Apenas `COORDENADOR`) - Header: `usuario-id: 1`
+    ```json
+    { "nome": "Atualizado", "email": "up@email.com", "login": "teste", "senha": "123", "perfil": "PROFESSOR" }
+    ```
+*   `DELETE /api/usuarios/{id}` (Apenas `COORDENADOR`) - Header: `usuario-id: 1`
 
----
+### 🟢 2. Cursos (`/api/cursos`)
 
-### 🟢 Turmas (`/api/turmas`)
+*   `POST /api/cursos` (Apenas `COORDENADOR`) - Header: `usuario-id: 1`
+    ```json
+    { "nome": "Design", "codigoSuap": "DS-001" }
+    ```
+*   `GET /api/cursos` (Acesso livre)
+*   `GET /api/cursos/{id}` (Acesso livre)
+*   `PUT /api/cursos/{id}` (Apenas `COORDENADOR`) - Header: `usuario-id: 1`
+*   `DELETE /api/cursos/{id}` (Apenas `COORDENADOR`) - Header: `usuario-id: 1`
 
-**1. Cadastrar Turma**
-* **Método:** `POST`
-* **URL:** `http://localhost:8080/api/turmas`
-* **Autorização:** Apenas `COORDENADOR`
-* **Headers:** 
-  * `usuario-id`: `1`
-* **Body (JSON):** *(Nota: `disciplinaId` 1, `professorId` 1 e `periodoLetivoId` 1 devem existir)*
-```json
-{
-  "disciplinaId": 1,
-  "professorId": 1,
-  "periodoLetivoId": 1,
-  "descricao": "Turma B - Estrutura de Dados",
-  "codigoSuap": "SUAP-TURMA-05"
-}
-```
+### 🟢 3. Disciplinas (`/api/disciplinas`)
 
-**2. Listar Todas as Turmas**
-* **Método:** `GET`
-* **URL:** `http://localhost:8080/api/turmas`
-* **Autorização:** Sem restrição explícita.
+*   `POST /api/disciplinas` (Apenas `COORDENADOR`) - Header: `usuario-id: 1`
+    ```json
+    { "nome": "UX Design", "codigo": "UX01", "codigoSuap": "SUAP-UX", "cargaHoraria": 40 }
+    ```
+*   `GET /api/disciplinas` (Acesso livre)
+*   `GET /api/disciplinas/{id}` (Acesso livre)
+*   `PUT /api/disciplinas/{id}` (Apenas `COORDENADOR`) - Header: `usuario-id: 1`
+*   `DELETE /api/disciplinas/{id}` (Apenas `COORDENADOR`) - Header: `usuario-id: 1`
 
----
+### 🟢 4. Períodos Letivos (`/api/periodos-letivos`)
 
-### 🟢 Matrículas (`/api/matriculas`)
+*   `POST /api/periodos-letivos` (Apenas `COORDENADOR`) - Header: `usuario-id: 1`
+    ```json
+    { "ano": 2027, "semestre": 1, "descricao": "2027.1" }
+    ```
+*   `GET /api/periodos-letivos` (Acesso livre)
+*   `GET /api/periodos-letivos/{id}` (Acesso livre)
+*   `PUT /api/periodos-letivos/{id}` (Apenas `COORDENADOR`) - Header: `usuario-id: 1`
+*   `DELETE /api/periodos-letivos/{id}` (Apenas `COORDENADOR`) - Header: `usuario-id: 1`
 
-**1. Matricular Aluno em Turma**
-* **Método:** `POST`
-* **URL:** `http://localhost:8080/api/matriculas`
-* **Autorização:** Apenas `COORDENADOR`
-* **Headers:** 
-  * `usuario-id`: `1`
-* **Body (JSON):** *(Ex: Matriculando João Silva na Turma 2)*
-```json
-{
-  "alunoId": 2,
-  "turmaId": 2
-}
-```
+### 🟢 5. Professores (`/api/professores`)
 
----
+*   `GET /api/professores/{professorId}/turmas` (Acesso livre) - *Traz todas as turmas do professor.*
+*   `GET /api/professores/{professorId}/turmas/{turmaId}/alunos` (Acesso livre) - *Traz as matrículas daquela turma.*
 
-### 🟢 Notas (`/api/notas`)
+### 🟢 6. Alunos (`/api/alunos`)
 
-**1. Lançar Nota**
-* **Método:** `POST`
-* **URL:** `http://localhost:8080/api/notas`
-* **Autorização:** Apenas `PROFESSOR` ou `COORDENADOR`
-* **Headers:** 
-  * `usuario-id`: `2` (Professor Carlos)
-* **Body (JSON):** *(Ex: Lançando nota para a Matrícula 1 do Aluno Exemplo)*
-```json
-{
-  "matriculaTurmaId": 1,
-  "descricao": "Prova 3",
-  "valor": 8.5
-}
-```
+*   `POST /api/alunos` (Apenas `COORDENADOR`) - Header: `usuario-id: 1`
+    ```json
+    { "usuarioId": 7, "cursoId": 1, "matricula": "20261010" }
+    ```
+    *(Nota: `usuarioId: 7` é o 'Aluno Teste Postman' que ainda não tem aluno vinculado. Evita erro de chave `OneToOne`.)*
+*   `GET /api/alunos` (Acesso livre)
+*   `GET /api/alunos/{id}` (Acesso livre)
+*   `PUT /api/alunos/{id}` (Apenas `COORDENADOR`) - Header: `usuario-id: 1`
+*   `DELETE /api/alunos/{id}` (Apenas `COORDENADOR`) - Header: `usuario-id: 1`
+*   `GET /api/alunos/{alunoId}/turmas` (Header `usuario-id: 1` ou do próprio aluno)
+*   `GET /api/alunos/{alunoId}/notas` (Header `usuario-id: 1` ou do próprio aluno)
+*   `GET /api/alunos/{alunoId}/faltas` (Header `usuario-id: 1` ou do próprio aluno)
+*   `GET /api/alunos/{alunoId}/situacao` (Header `usuario-id: 1` ou do próprio aluno) - *Gera o boletim completo.*
 
-**2. Buscar Notas por Matrícula**
-* **Método:** `GET`
-* **URL:** `http://localhost:8080/api/notas/matricula/1`
-* **Autorização:** Sem restrição explícita (qualquer usuário logado pode visualizar se conhecer o ID da matrícula).
+### 🟢 7. Turmas (`/api/turmas`)
 
----
+*   `POST /api/turmas` (Apenas `COORDENADOR`) - Header: `usuario-id: 1`
+    ```json
+    { "disciplinaId": 3, "professorId": 1, "periodoLetivoId": 1, "descricao": "Turma Extra", "codigoSuap": "SUAP-EXTRA" }
+    ```
+*   `GET /api/turmas` (Acesso livre)
+*   `GET /api/turmas/{id}` (Acesso livre)
+*   `PUT /api/turmas/{id}` (Apenas `COORDENADOR`) - Header: `usuario-id: 1`
+*   `DELETE /api/turmas/{id}` (Apenas `COORDENADOR`) - Header: `usuario-id: 1`
 
-### 🟢 Faltas (`/api/faltas`)
+### 🟢 8. Matrículas (`/api/matriculas`)
 
-**1. Lançar Falta**
-* **Método:** `POST`
-* **URL:** `http://localhost:8080/api/faltas`
-* **Autorização:** Apenas `PROFESSOR` ou `COORDENADOR`
-* **Headers:** 
-  * `usuario-id`: `2` (Professor Carlos)
-* **Body (JSON):**
-```json
-{
-  "matriculaTurmaId": 1,
-  "data": "2026-05-18",
-  "quantidade": 2,
-  "observacao": "Ausência por motivo de saúde"
-}
-```
+*   `POST /api/matriculas` (Apenas `COORDENADOR`) - Header: `usuario-id: 1`
+    ```json
+    { "alunoId": 3, "turmaId": 2 }
+    ```
+    *(Nota: A Ana Souza (`alunoId: 3`) ainda não está na Turma de Programação Web (`turmaId: 2`). Teste 100% seguro contra duplicidades!)*
+*   `GET /api/matriculas/{id}` (Acesso livre)
+*   `GET /api/matriculas/aluno/{alunoId}` (Acesso livre)
+*   `GET /api/matriculas/turma/{turmaId}` (Acesso livre)
+*   `DELETE /api/matriculas/{id}` (Apenas `COORDENADOR`) - Header: `usuario-id: 1`
 
----
+### 🟢 9. Notas (`/api/notas`)
 
-### 🟢 Chat da Turma (`/api/mensagens`)
+*   `POST /api/notas` (Apenas `PROFESSOR` ou `COORDENADOR`) - Header: `usuario-id: 2`
+    ```json
+    { "matriculaTurmaId": 5, "descricao": "Avaliação Parcial", "valor": 8.5 }
+    ```
+*   `GET /api/notas/matricula/{matriculaTurmaId}` (Acesso livre)
+*   `DELETE /api/notas/{id}` (Apenas `PROFESSOR` ou `COORDENADOR`) - Header: `usuario-id: 2`
 
-**1. Enviar Mensagem**
-* **Método:** `POST`
-* **URL:** `http://localhost:8080/api/mensagens`
-* **Autorização:** Sem restrição explícita de perfil, mas exige remetente válido.
-* **Headers:** 
-  * `usuario-id`: `3` (Aluno Exemplo enviando a mensagem)
-* **Body (JSON):** *(Ex: Aluno 3 enviando mensagem no Chat 1)*
-```json
-{
-  "chatTurmaId": 1,
-  "remetenteId": 3,
-  "texto": "Bom dia professor, qual será o assunto da próxima aula?"
-}
-```
+### 🟢 10. Faltas (`/api/faltas`)
 
-**2. Listar Mensagens do Chat**
-* **Método:** `GET`
-* **URL:** `http://localhost:8080/api/mensagens/chat/1`
-* **Autorização:** Apenas exige que o solicitante exista no banco.
-* **Headers:** 
-  * `usuario-id`: `3`
+*   `POST /api/faltas` (Apenas `PROFESSOR` ou `COORDENADOR`) - Header: `usuario-id: 2`
+    ```json
+    { "matriculaTurmaId": 5, "data": "2026-06-01", "quantidade": 2, "observacao": "Gripe" }
+    ```
+*   `GET /api/faltas/matricula/{matriculaTurmaId}` (Acesso livre)
+*   `DELETE /api/faltas/{id}` (Apenas `PROFESSOR` ou `COORDENADOR`) - Header: `usuario-id: 2`
 
-**3. Apagar/Inativar Mensagem**
-* **Método:** `DELETE`
-* **URL:** `http://localhost:8080/api/mensagens/1`
-* **Autorização:** Apenas `COORDENADOR` ou o próprio `AUTOR` da mensagem.
-* **Headers:** 
-  * `usuario-id`: `3` (O autor apagando a própria mensagem) ou `1` (Coordenador).
+### 🟢 11. Mensagens / Chat (`/api/mensagens`)
+
+*   `POST /api/mensagens` - Header: `usuario-id: 3` (Simulando o Aluno Exemplo)
+    ```json
+    { "chatTurmaId": 2, "remetenteId": 3, "texto": "Professor, pode tirar uma dúvida de JS?" }
+    ```
+*   `GET /api/mensagens/chat/{chatTurmaId}` - Header: `usuario-id: 3`
+*   `DELETE /api/mensagens/{id}` (Apenas o **Autor** ou o **Coordenador**) - Header: `usuario-id: 3` (Para apagar a própria mensagem)
