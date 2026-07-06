@@ -3,10 +3,6 @@ import '../../data/repositories/aluno_repository_impl.dart';
 import '../../data/models/situacao_aluno_turma_model.dart';
 import '../../../auth/presentation/providers/auth_provider.dart';
 
-final alunoRepositoryProvider = Provider((ref) {
-  // Configured to point to local backend
-  return AlunoRepositoryImpl(baseUrl: 'http://localhost:8080');
-});
 
 final situacaoAlunoProvider = FutureProvider.autoDispose<List<SituacaoAlunoTurmaModel>>((ref) async {
   final authState = ref.watch(authProvider);
