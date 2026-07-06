@@ -213,7 +213,7 @@ Para subir **toda a infraestrutura** (Banco de Dados PostgreSQL, Backend Spring 
 
 ### Passo a passo
 
-1. **Na raiz do projeto** (onde encontra-se o arquivo `docker-compose.yml`), abra o terminal.
+1. **Na raiz do projeto** (`c:\Users\Rony\IdeaProjectsJava_Bsi\sistema-academico`, onde encontra-se o arquivo `docker-compose.yml`), abra o terminal.
 2. (Opcional) Você pode definir as credenciais do banco exportando as variáveis `USUARIO` e `SENHA` no seu terminal ou criando um arquivo `.env` na raiz. Se omitidas, o padrão será `postgres` / `postgres`.
 3. Rode o seguinte comando para construir as imagens e iniciar os contêineres:
 
