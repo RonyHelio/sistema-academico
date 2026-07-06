@@ -201,3 +201,44 @@ Todas as requisições que alteram estado (POST, PUT, DELETE) e algumas de GET e
     ```
 *   `GET /api/mensagens/chat/{chatTurmaId}` - Header: `usuario-id: 3`
 *   `DELETE /api/mensagens/{id}` (Apenas o **Autor** ou o **Coordenador**) - Header: `usuario-id: 3` (Para apagar a própria mensagem)
+
+---
+
+## 4. Como rodar com Docker (Deploy Completo Integrado)
+
+Para subir **toda a infraestrutura** (Banco de Dados PostgreSQL, Backend Spring Boot e Frontend Flutter) com apenas um comando de forma isolada e pronta para uso:
+
+### Pré-requisitos
+- Ter o **Docker** e o **Docker Compose** instalados na sua máquina.
+
+### Passo a passo
+
+1. **Na raiz do projeto** (onde encontra-se o arquivo `docker-compose.yml`), abra o terminal.
+2. (Opcional) Você pode definir as credenciais do banco exportando as variáveis `USUARIO` e `SENHA` no seu terminal ou criando um arquivo `.env` na raiz. Se omitidas, o padrão será `postgres` / `postgres`.
+3. Rode o seguinte comando para construir as imagens e iniciar os contêineres:
+
+   ```bash
+   docker-compose up --build -d
+   ```
+   *(A primeira execução irá baixar as dependências do Java, o SDK do Flutter, gerar os models estáticos e compilar tudo. Isso pode levar alguns minutos).*
+
+4. **Acompanhe os logs** (Opcional):
+   ```bash
+   docker-compose logs -f
+   ```
+
+### URLs de Acesso
+
+Assim que os contêineres estiverem de pé e rodando:
+
+- 🌐 **Frontend (Aplicação Web)**: Acesse no seu navegador `http://localhost` (na porta padrão 80).
+- ⚙️ **Backend (API Spring Boot)**: Disponível e escutando na porta `http://localhost:8080`.
+- 🗄️ **Banco de Dados (PostgreSQL)**: Disponível para conexões via DBeaver/PgAdmin em `localhost:5432` (User: `postgres`, Pass: `postgres`, BD: `projeto_academico`).
+
+### Como parar os contêineres
+
+Para desligar todos os serviços e remover os contêineres:
+```bash
+docker-compose down
+```
+*(Seus dados do PostgreSQL estão salvos de forma persistente em um volume local. Caso queira limpar tudo, incluindo o volume de dados, adicione a flag `-v`: `docker-compose down -v`).*
