@@ -213,16 +213,20 @@ Para subir **toda a infraestrutura** (Banco de Dados PostgreSQL, Backend Spring 
 
 ### Passo a passo
 
-1. **Na raiz do projeto** (`c:\Users\Rony\IdeaProjectsJava_Bsi\sistema-academico`, onde encontra-se o arquivo `docker-compose.yml`), abra o terminal.
-2. (Opcional) Você pode definir as credenciais do banco exportando as variáveis `USUARIO` e `SENHA` no seu terminal ou criando um arquivo `.env` na raiz. Se omitidas, o padrão será `postgres` / `postgres`.
-3. Rode o seguinte comando para construir as imagens e iniciar os contêineres:
+1. Abra o menu **Iniciar do Windows**, digite **cmd** e aperte Enter para abrir o **Prompt de Comando**.
+2. Dentro do prompt de comando, digite o seguinte comando e aperte Enter para navegar até a pasta do projeto:
+   ```cmd
+   cd c:\Users\Rony\IdeaProjectsJava_Bsi\sistema-academico
+   ```
+3. (Opcional) Você pode definir as credenciais do banco exportando as variáveis `USUARIO` e `SENHA` no seu terminal ou criando um arquivo `.env` na raiz. Se omitidas, o padrão será `postgres` / `postgres`.
+4. Rode o seguinte comando para construir as imagens e iniciar os contêineres:
 
    ```bash
    docker-compose up --build -d
    ```
    *(A primeira execução irá baixar as dependências do Java, o SDK do Flutter, gerar os models estáticos e compilar tudo. Isso pode levar alguns minutos).*
 
-4. **Acompanhe os logs** (Opcional):
+5. **Acompanhe os logs** (Opcional):
    ```bash
    docker-compose logs -f
    ```
