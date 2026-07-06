@@ -232,13 +232,19 @@ Para subir **toda a infraestrutura** (Banco de Dados PostgreSQL, Backend Spring 
    docker-compose logs -f
    ```
 
-### URLs de Acesso
+### Link Principal de Acesso (A Aplicação Completa)
 
-Assim que os contêineres estiverem de pé e rodando:
+Para usar o Sistema Acadêmico visualmente (telas, chat, tabelas, login, etc.), assim que o Docker terminar de carregar tudo, basta você acessar o seguinte (e único) link no seu navegador de internet (Chrome, Edge, Safari, etc.):
 
-- 🌐 **Frontend (Aplicação Web)**: Acesse no seu navegador `http://localhost` (na porta padrão 80).
-- ⚙️ **Backend (API Spring Boot)**: Disponível e escutando na porta `http://localhost:8080`.
-- 🗄️ **Banco de Dados (PostgreSQL)**: Disponível para conexões via DBeaver/PgAdmin em `localhost:5432` (User: `postgres`, Pass: `postgres`, BD: `projeto_academico`).
+👉 **http://localhost** 
+
+Pronto! Somente acessando esse link você usa o sistema completo. O Frontend se encarregará de conversar automaticamente com o Backend.
+
+---
+
+*(Opcional: Informações técnicas apenas para Desenvolvedores)*
+- *Acesso invisível à API (Spring Boot)*: `http://localhost:8080` (Apenas para fazer testes manuais no Postman).
+- *Acesso ao Banco de Dados (PostgreSQL)*: Porta `5432` conectando via DBeaver/PgAdmin (User: `postgres`, Pass: `postgres`, BD: `projeto_academico`).
 
 ### Como parar os contêineres
 
