@@ -213,13 +213,14 @@ Para subir **toda a infraestrutura** (Banco de Dados PostgreSQL, Backend Spring 
 
 ### Passo a passo
 
-1. Abra o menu **Iniciar do Windows**, digite **cmd** e aperte Enter para abrir o **Prompt de Comando**.
-2. Dentro do prompt de comando, digite o seguinte comando e aperte Enter para navegar até a pasta do projeto:
+1. **MUITO IMPORTANTE:** Abra o menu **Iniciar do Windows**, procure pelo programa **Docker Desktop** e abra-o. Aguarde o aplicativo iniciar completamente e garantir que o motor ("Engine") esteja rodando (ícone verde). Sem isso, o terminal não vai achar o Docker!
+2. Com o Docker já rodando em segundo plano, abra novamente o menu **Iniciar do Windows**, digite **cmd** e aperte Enter para abrir o **Prompt de Comando**.
+3. Dentro do prompt de comando, digite o seguinte comando e aperte Enter para navegar até a pasta do projeto:
    ```cmd
    cd c:\Users\Rony\IdeaProjectsJava_Bsi\sistema-academico
    ```
-3. (Opcional) Você pode definir as credenciais do banco exportando as variáveis `USUARIO` e `SENHA` no seu terminal ou criando um arquivo `.env` na raiz. Se omitidas, o padrão será `postgres` / `postgres`.
-4. Rode o seguinte comando para construir as imagens e iniciar os contêineres:
+4. (Opcional) Você pode definir as credenciais do banco exportando as variáveis `USUARIO` e `SENHA` no seu terminal ou criando um arquivo `.env` na raiz. Se omitidas, o padrão será `postgres` / `postgres`.
+5. Rode o seguinte comando para construir as imagens e iniciar os contêineres:
 
    ```bash
    docker-compose up --build -d
