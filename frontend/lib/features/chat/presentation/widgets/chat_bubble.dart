@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../auth/presentation/providers/auth_provider.dart';
-import '../../auth/data/auth_state.dart';
-import '../domain/mensagem_chat.dart';
+import '../../../auth/presentation/providers/auth_provider.dart';
+import '../../../auth/data/auth_state.dart';
+import '../../../../data/models/mensagem_chat_model.dart';
 
 class ChatBubble extends ConsumerWidget {
-  final MensagemChat message;
+  final MensagemChatModel message;
   final VoidCallback onDelete;
 
   const ChatBubble({
