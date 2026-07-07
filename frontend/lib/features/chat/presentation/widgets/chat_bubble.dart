@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../auth/presentation/providers/auth_provider.dart';
 import '../../../auth/data/auth_state.dart';
-import '../../../../data/models/mensagem_chat_model.dart';
+import '../../domain/mensagem_chat.dart';
 
 class ChatBubble extends ConsumerWidget {
-  final MensagemChatModel message;
+  final MensagemChat message;
   final VoidCallback onDelete;
 
   const ChatBubble({
@@ -53,7 +53,7 @@ class ChatBubble extends ConsumerWidget {
                 ),
               ),
             Text(
-              message.isInactive ? 'Mensagem apagada' : message.texto,
+              message.isInactive ? 'Mensagem apagada' : (message.texto ?? ''),
               style: TextStyle(
                 color: message.isInactive
                     ? Theme.of(context).colorScheme.onSurface.withOpacity(0.6)
