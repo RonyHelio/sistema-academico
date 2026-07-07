@@ -14,6 +14,9 @@ COPY . .
 RUN flutter pub get
 RUN dart run build_runner build -d
 
+# Inicializa o scaffolding para web (pois o projeto foi criado estaticamente)
+RUN flutter create . --platforms web
+
 # Compila o app para Web
 RUN flutter build web
 
