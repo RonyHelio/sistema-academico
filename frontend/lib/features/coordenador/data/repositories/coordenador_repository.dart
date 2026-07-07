@@ -1,10 +1,10 @@
-import '../../../data/models/curso_model.dart';
-import '../../../data/models/disciplina_model.dart';
-import '../../../data/models/periodo_letivo_model.dart';
-import '../../../data/models/turma_model.dart';
-import '../../../data/models/aluno_model.dart';
-import '../../../data/models/usuario_model.dart';
-import '../../../data/models/matricula_turma_model.dart';
+import '../../../../data/models/curso_model.dart';
+import '../../../../data/models/disciplina_model.dart';
+import '../../../../data/models/periodo_letivo_model.dart';
+import '../../../../data/models/turma_model.dart';
+import '../../../../data/models/aluno_model.dart';
+import '../../../../data/models/usuario_model.dart';
+import '../../../../data/models/matricula_turma_model.dart';
 
 abstract class CoordenadorRepository {
   Future<List<CursoModel>> getCursos();
